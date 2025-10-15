@@ -1,0 +1,5 @@
+.venv/
+.env
+.idea
+output
+core/cookies/freelance.ru_cookies.txt
