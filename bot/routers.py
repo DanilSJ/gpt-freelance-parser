@@ -1,5 +1,5 @@
 from aiogram import Router
-from bot.handlers.start import router as start_router
+from bot.start.handler import router as start_router
 
 from bot.handlers.callbacks import router as callbacks_router
 from bot.handlers.accept import router as accept_router
