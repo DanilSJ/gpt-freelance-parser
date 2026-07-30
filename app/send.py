@@ -19,12 +19,8 @@ def send_message(
     csrf_token = csrf_input["value"] if csrf_input else ""
 
     data = {
-        "StartDiscussionForm[message]": message,
-        "StartDiscussionForm[cost]": str(cost),
-        "StartDiscussionForm[term]": str(term),
+        "TaskReply[text]": message,
         "_csrf": csrf_token,
-        "StartDiscussionForm[signature]": "1",
-        "StartDiscussionForm[works_preview]": "1",
     }
 
     headers = build_headers(discussion_url)
