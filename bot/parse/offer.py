@@ -1,6 +1,6 @@
 from aiogram.types import Message, CallbackQuery
 from aiogram.fsm.context import FSMContext
-from bot.states import OfferStates
+from bot.parse.states import OfferStates
 import app.send as send_mod
 from app.generate import generate_response
 from bot.parse.keyboard import build_project_keyboard
