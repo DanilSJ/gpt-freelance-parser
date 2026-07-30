@@ -6,7 +6,7 @@ from aiogram.enums import ParseMode
 from core.config import settings
 from bot.routers import router
 
-async def main():
+async def Telegram():
     dp = Dispatcher(storage=MemoryStorage())
     dp.include_router(router)
     bot = Bot(
@@ -15,6 +15,16 @@ async def main():
     )
     print("Starting aiogram Telegram bot...")
     await dp.start_polling(bot)
+
+async def Max():
+    pass
+
+async def main():
+    if settings.Telegram:
+        await Telegram()
+
+    if settings.Max:
+        await Max()
 
 if __name__ == "__main__":
     asyncio.run(main())
