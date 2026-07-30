@@ -1,14 +1,15 @@
-from aiogram import Router, F
+from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
+from bot.parse.parse import start_parse_task, stop_parse_task
 from core.config import settings
 
 router = Router()
 
 
 @router.message(CommandStart())
-async def start_cmd(message: Message, state: FSMContext):
+async def start_cmd(message: Message):
     if message.from_user.id != settings.allowed_user_id:
         return
     await message.answer(
@@ -20,7 +21,6 @@ async def start_cmd(message: Message, state: FSMContext):
 async def parserun_cmd(message: Message, state: FSMContext):
     if message.from_user.id != settings.allowed_user_id:
         return
-    from bot.handlers.parse import start_parse_task
 
     await start_parse_task(message, state)
 
@@ -29,6 +29,5 @@ async def parserun_cmd(message: Message, state: FSMContext):
 async def parsestop_cmd(message: Message, state: FSMContext):
     if message.from_user.id != settings.allowed_user_id:
         return
-    from bot.handlers.parse import stop_parse_task
 
     await stop_parse_task(message, state)
