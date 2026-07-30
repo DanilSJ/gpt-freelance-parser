@@ -1,6 +1,7 @@
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
 from aiogram.fsm.context import FSMContext
+from bot.parse.offer import request_offer_comment, regenerate_ai_response, start_offer_flow
 from core.config import settings
 
 
@@ -11,9 +12,7 @@ router = Router()
 async def on_accept(callback: CallbackQuery, state: FSMContext):
     if callback.from_user.id != settings.allowed_user_id:
         return
-    await callback.answer()  # Сразу ответить Telegram!
-    from bot.services.offer import start_offer_flow
-
+    await callback.answer()
     await start_offer_flow(callback, state)
 
 
@@ -21,7 +20,7 @@ async def on_accept(callback: CallbackQuery, state: FSMContext):
 async def on_reject(callback: CallbackQuery, state: FSMContext):
     if callback.from_user.id != settings.allowed_user_id:
         return
-    await callback.answer()  # Сразу ответить!
+    await callback.answer()
     await callback.message.edit_reply_markup(reply_markup=None)
 
 
@@ -30,7 +29,6 @@ async def on_regen(callback: CallbackQuery, state: FSMContext):
     if callback.from_user.id != settings.allowed_user_id:
         return
     await callback.answer("Генерация отклика...", show_alert=False)  # Сразу!
-    from bot.services.offer import regenerate_ai_response
 
     await regenerate_ai_response(callback, state)
 
@@ -39,7 +37,6 @@ async def on_regen(callback: CallbackQuery, state: FSMContext):
 async def on_comment(callback: CallbackQuery, state: FSMContext):
     if callback.from_user.id != settings.allowed_user_id:
         return
-    await callback.answer()  # Сразу ответить!
-    from bot.services.offer import request_offer_comment
+    await callback.answer()
 
     await request_offer_comment(callback, state)

@@ -1,8 +1,8 @@
 from aiogram import Router
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
-from bot.states import OfferStates
-from bot.services.offer import (
+from bot.parse.states import OfferStates
+from bot.parse.offer import (
     handle_offer_price,
     handle_offer_term,
     handle_offer_comment,
