@@ -2,7 +2,7 @@ from aiogram import Router
 from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 from aiogram.fsm.context import FSMContext
-from bot.parse.parse import start_parse_task, stop_parse_task
+from bot.parse.handler import start_parse_task, stop_parse_task
 from core.config import settings
 
 router = Router()
