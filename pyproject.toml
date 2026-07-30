@@ -9,6 +9,7 @@ dependencies = [
     "beautifulsoup4>=4.15.0",
     "fake-useragent>=2.2.0",
     "g4f[all]>=7.9.4",
+    "httpx>=0.28.1",
     "pydantic-settings>=2.14.2",
     "requests>=2.34.2",
 ]

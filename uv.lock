@@ -1160,6 +1160,7 @@ dependencies = [
     { name = "beautifulsoup4" },
     { name = "fake-useragent" },
     { name = "g4f", extra = ["all"] },
+    { name = "httpx" },
     { name = "pydantic-settings" },
     { name = "requests" },
 ]
@@ -1170,6 +1171,7 @@ requires-dist = [
     { name = "beautifulsoup4", specifier = ">=4.15.0" },
     { name = "fake-useragent", specifier = ">=2.2.0" },
     { name = "g4f", extras = ["all"], specifier = ">=7.9.4" },
+    { name = "httpx", specifier = ">=0.28.1" },
     { name = "pydantic-settings", specifier = ">=2.14.2" },
     { name = "requests", specifier = ">=2.34.2" },
 ]
