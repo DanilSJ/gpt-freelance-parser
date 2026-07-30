@@ -3,7 +3,7 @@ from aiogram.fsm.context import FSMContext
 from bot.states import OfferStates
 import app.send as send_mod
 from app.generate import generate_response
-from bot.keyboards import build_project_keyboard
+from bot.parse.keyboard import build_project_keyboard
 from bot.utils import safe_send_message, safe_answer
 
 

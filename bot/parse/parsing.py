@@ -7,7 +7,7 @@ from app.cookie import load_cookies_mozilla
 from app.header import build_headers
 from app.extract import extract_id_from_url, extract_first_p_from_discussion
 from app.generate import generate_response
-from bot.keyboards import build_project_keyboard
+from bot.parse.keyboard import build_project_keyboard
 import aiohttp
 from bot.utils import safe_send_message
 

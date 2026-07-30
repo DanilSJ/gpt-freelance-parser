@@ -1,7 +1,7 @@
 from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from core.config import bot
-import bot.services.parsing as parsing_service
+import bot.parse.parsing as parsing_service
 import asyncio
 
 
