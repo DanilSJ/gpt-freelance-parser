@@ -12,7 +12,6 @@ def send_message(
 ) -> bool:
     resp = session.get(discussion_url)
     if not resp or resp.status_code != 200:
-        print("    Не удалось открыть страницу для отправки сообщения")
         return False
 
     soup = BeautifulSoup(resp.text, "html.parser")
@@ -32,8 +31,6 @@ def send_message(
 
     post_resp = session.post(discussion_url, data=data, headers=headers)
     if post_resp.status_code == 200:
-        print("    Сообщение отправлено успешно")
         return True
     else:
-        print("    Ошибка при отправке сообщения:", post_resp.status_code)
         return False
