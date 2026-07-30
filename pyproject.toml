@@ -10,6 +10,7 @@ dependencies = [
     "fake-useragent>=2.2.0",
     "g4f[all]>=7.9.4",
     "httpx>=0.28.1",
+    "maxapi>=1.2.1",
     "pydantic-settings>=2.14.2",
     "requests>=2.34.2",
 ]
