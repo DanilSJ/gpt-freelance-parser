@@ -8,6 +8,9 @@ import os
 load_dotenv()
 
 class Settings(BaseSettings):
+    Telegram: bool = True
+    Max: bool = True
+
     telegram_token: str = os.environ["TELEGRAM_TOKEN"]
     allowed_user_id: int = 1700036328
     system_message: str = (
