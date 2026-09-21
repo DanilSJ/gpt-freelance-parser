@@ -10,13 +10,19 @@ from app.generate import generate_response
 from max.parse.keyboard import build_project_keyboard
 from max.utils import safe_send_message
 import httpx
+from maxapi.enums.format import Format
 
 async def parse_projects_and_send(bot, chat_id, state):
     cj = load_cookies_mozilla(settings.cookies)
     cookie_dict = {c.name: c.value for c in cj}
     results = []
 
-    async with httpx.AsyncClient(cookies=cookie_dict) as client:
+    async with httpx.AsyncClient(
+        cookies=cookie_dict,
+        follow_redirects=True,
+        timeout=30.0,
+        headers=build_headers(),
+    ) as client:
         for page in range(settings.pages_from, settings.pages_to + 1):
             data = await state.get_data()
             task = data.get("parser_task")
@@ -47,7 +53,6 @@ async def parse_projects_and_send(bot, chat_id, state):
                 project_id = extract_id_from_url(project_link)
                 if not project_id:
                     continue
-
                 # https://freelance.ru/task/reply/create
                 # text
                 # taskId
@@ -63,13 +68,13 @@ async def parse_projects_and_send(bot, chat_id, state):
                     continue
                 soup_disc = BeautifulSoup(disc_resp.text, "html.parser")
 
-                div_cost = soup_disc.find("div", _class="tv-meta-item__val tv-meta-item__val--budget")
-                cost = div_cost.find("span", _class="bold").get_text()
+                div_cost = soup_disc.find("div", class_="tv-meta-item__val tv-meta-item__val--budget")
+                cost = div_cost.find("span", class_="bold").get_text()
                 if not cost:
                     cost = "цена не указана"
 
                 term = soup_disc.find(
-                    "div", _class="tv-meta-item__val"
+                    "div", class_="tv-meta-item__val"
                 ).get_text()
 
                 ai_response = generate_response(task_text)
@@ -91,8 +96,8 @@ async def parse_projects_and_send(bot, chat_id, state):
                     bot,
                     chat_id,
                     f"Задание:\n{task_text}\n\nGPT: {ai_response}\n\nДанные из формы сайта:\nЦена: {cost}\nСрок: {term}",
-                    reply_markup=keyboard,
-                    parse_mode="Markdown",
+                    attachments=[keyboard.as_markup()],
+                    format=Format.MARKDOWN,
                 )
                 results.append(
                     {

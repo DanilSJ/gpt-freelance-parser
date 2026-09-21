@@ -8,7 +8,8 @@ def extract_id_from_url(url: str) -> str:
 
 def extract_first_p_from_discussion(html: str) -> str:
     soup = BeautifulSoup(html, "html.parser")
-    div_info = soup.find("div", class_="tcard tv-hero")
+    div_info = soup.find("section", class_="tcard tv-hero")
+
     if not div_info:
         return ""
     return div_info.get_text()
