@@ -8,7 +8,7 @@ import os
 load_dotenv()
 
 class Settings(BaseSettings):
-    Telegram: bool = True
+    Telegram: bool = False
     Max: bool = True
 
     telegram_token: str = os.environ["TELEGRAM_TOKEN"]
